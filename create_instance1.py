@@ -43,7 +43,7 @@ def create_instance(compute, project, zone, name, bucket):
     machine_type = "zones/%s/machineTypes/f1-micro" % zone
     startup_script = open(
         os.path.join(
-            os.path.dirname(__file__), 'startup-script2.sh'), 'r').read()
+            os.path.dirname(__file__), 'startup-script1.sh'), 'r').read()
     image_url = "http://storage.googleapis.com/gce-demo-input/photo.jpg"
     image_caption = "Ready for dessert?"
     config = {
