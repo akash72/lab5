@@ -9,9 +9,7 @@ import google.oauth2.service_account as service_account
 #
 # Use Google Service Account - See https://google-auth.readthedocs.io/en/latest/reference/google.oauth2.service_account.html#module-google.oauth2.service_account
 #
-data = json.loads(os.environ['SERVICE_CRED'])
-with open('service-credentials.json', 'w') as outfile:
-    json.dump(data, outfile)
+
 project = os.getenv('GOOGLE_CLOUD_PROJECT') or 'FILL IN YOUR PROJECT'
 credentials = service_account.Credentials.from_service_account_file(filename='service-credentials.json')
 service = googleapiclient.discovery.build('compute', 'v1', credentials=credentials)
