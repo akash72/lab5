@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import argparse
-import os , json
+import os 
+import json
 import time
 from pprint import pprint
 import googleapiclient.discovery
@@ -13,6 +14,8 @@ import google.oauth2.service_account as service_account
 project = os.getenv('GOOGLE_CLOUD_PROJECT') or 'assignment1-251518'
 credentials = service_account.Credentials.from_service_account_file(filename='service-credentials.json')
 service = googleapiclient.discovery.build('compute', 'v1', credentials=credentials)
+
+# [START wait_for_operation]
 def wait_for_operation(compute, project, zone, operation):
     print('Waiting for operation to finish...')
     while True:
@@ -27,6 +30,9 @@ def wait_for_operation(compute, project, zone, operation):
                 raise Exception(result['error'])
             return result
         time.sleep(1)
+
+# [END wait_for_operation]
+
 # [START create_instance]
 def create_instance(compute, project, zone, name, bucket):
     # Get the latest Debian Jessie image.
@@ -37,7 +43,7 @@ def create_instance(compute, project, zone, name, bucket):
     machine_type = "zones/%s/machineTypes/f1-micro" % zone
     startup_script = open(
         os.path.join(
-            os.path.dirname(__file__), 'startup-script1.sh'), 'r').read()
+            os.path.dirname(__file__), 'startup-script2.sh'), 'r').read()
     image_url = "http://storage.googleapis.com/gce-demo-input/photo.jpg"
     image_caption = "Ready for dessert?"
     config = {
@@ -100,6 +106,7 @@ def create_instance(compute, project, zone, name, bucket):
 def list_instances(compute, project, zone):
     result = compute.instances().list(project=project, zone=zone).execute()
     return result['items'] if 'items' in result else None
+
 def set_tag(compute, project_id, zone , instance):
     # Sets the http and https tags to allow traffic
     data = compute.instances().get(project=project_id,zone=zone,instance=instance).execute()
@@ -123,6 +130,6 @@ zone = "us-west1-b"
 instance_name_template = "inside-instance"
 create_instance(service,project,zone,instance_name_template,"15buck")
 set_tag(service,"assignment1-251518","us-west1-b","inside-instance")
-print("Your running instances are:")
+print("Following instances are running")
 for instance in list_instances(service, project, 'us-west1-b'):
     print(instance['name'])
