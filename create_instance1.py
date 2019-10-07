@@ -9,8 +9,8 @@ import google.oauth2.service_account as service_account
 #
 # Use Google Service Account - See https://google-auth.readthedocs.io/en/latest/reference/google.oauth2.service_account.html#module-google.oauth2.service_account
 #
-data = json.loads(os.environ['SERVICE_CREDENTIALS'])
-with open('service_credentials.json', 'w') as outfile:
+data = json.loads(os.environ['SERVICE_CRED'])
+with open('service-credentials.json', 'w') as outfile:
     json.dump(data, outfile)
 project = os.getenv('GOOGLE_CLOUD_PROJECT') or 'FILL IN YOUR PROJECT'
 credentials = service_account.Credentials.from_service_account_file(filename='service-credentials.json')
@@ -123,7 +123,7 @@ def set_tag(compute, project_id, zone , instance):
 project = "assignment1-251518"
 zone = "us-west1-b"
 instance_name_template = "inside-instance"
-create_instance(service,project,zone,instance_name_template,"instance-1")
+create_instance(service,project,zone,instance_name_template,"15buck")
 set_tag(service,"assignment1-251518","us-west1-b","inside-instance")
 print("Your running instances are:")
 for instance in list_instances(service, project, 'us-west1-b'):
