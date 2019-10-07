@@ -10,7 +10,7 @@ import google.oauth2.service_account as service_account
 # Use Google Service Account - See https://google-auth.readthedocs.io/en/latest/reference/google.oauth2.service_account.html#module-google.oauth2.service_account
 #
 
-project = os.getenv('GOOGLE_CLOUD_PROJECT') or 'FILL IN YOUR PROJECT'
+project = os.getenv('GOOGLE_CLOUD_PROJECT') or 'assignment1-251518'
 credentials = service_account.Credentials.from_service_account_file(filename='service-credentials.json')
 service = googleapiclient.discovery.build('compute', 'v1', credentials=credentials)
 def wait_for_operation(compute, project, zone, operation):
