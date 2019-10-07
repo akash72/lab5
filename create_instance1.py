@@ -124,7 +124,7 @@ project = "assignment1-251518"
 zone = "us-west1-b"
 instance_name_template = "inside-instance"
 create_instance(service,project,zone,instance_name_template,"instance-1")
-set_tag(service,"wide-journey-251423","us-west1-b","inside-instance")
+set_tag(service,"assignment1-251518","us-west1-b","inside-instance")
 print("Your running instances are:")
 for instance in list_instances(service, project, 'us-west1-b'):
     print(instance['name'])
