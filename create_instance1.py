@@ -39,7 +39,7 @@ def create_instance(compute, project, zone, name, bucket):
     machine_type = "zones/%s/machineTypes/f1-micro" % zone
     startup_script = open(
         os.path.join(
-            os.path.dirname(__file__), 'startup-script.sh'), 'r').read()
+            os.path.dirname(__file__), 'startup-script1.sh'), 'r').read()
     image_url = "http://storage.googleapis.com/gce-demo-input/photo.jpg"
     image_caption = "Ready for dessert?"
     config = {
@@ -120,7 +120,7 @@ def set_tag(compute, project_id, zone , instance):
     #response = request.rensponse()
     #print(response)
     #wait_to_complete.wait(compute, project_id, zone, request['name'], 'enabling http and https traffic for ' + instance)
-project = "wide-journey-251423"
+project = "assignment1-251518"
 zone = "us-west1-b"
 instance_name_template = "inside-instance"
 create_instance(service,project,zone,instance_name_template,"instance-1")
